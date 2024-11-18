@@ -2,12 +2,7 @@
 # Dockerfile - Build a custom OpenWRT firmware image.
 #
 
-
-# SHA256 from: docker inspect --format='{{index .RepoDigests 0}}' debian:bullseye-slim
-ARG DEBIAN_BASE_IMAGE="debian@sha256:b55e2651b71408015f8068dd74e1d04404a8fa607dd2cfe284b4824c11f4d9bd"
-
-
-FROM $DEBIAN_BASE_IMAGE
+FROM debian:bullseye-slim
 
 ARG BUILD_ROOT="/var/openwrt-build"
 ARG BUILD_USER="openwrt"
@@ -32,6 +27,7 @@ RUN apt-get -qq -y update \
         unzip \
         wget \
         python3 \
+        python3-distutils \
         git \
         file \
         rsync \
