@@ -2,4 +2,3 @@
 # Optional services to disable by default.
 #
 
-stubby

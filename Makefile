@@ -5,11 +5,11 @@
 
 SHELL := bash -e
 
-OPENWRT_RELEASE := 21.02.7
+OPENWRT_RELEASE := 23.05.5
 
-OPENWRT_TARGET := mvebu
-OPENWRT_SUBTARGET := cortexa9
-OPENWRT_PROFILE := linksys_wrt1900acs
+OPENWRT_TARGET := ramips
+OPENWRT_SUBTARGET := mt7621
+OPENWRT_PROFILE := tplink_re650-v2
 
 DOCKER_IMAGE := openwrt-custom-builder:$(OPENWRT_RELEASE)
 
