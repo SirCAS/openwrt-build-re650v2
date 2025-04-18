@@ -22,6 +22,7 @@ RUN apt-get -qq -y update \
         ca-certificates \
         curl \
         xz-utils \
+        zstd \
         build-essential \
         gawk \
         unzip \
@@ -37,8 +38,9 @@ RUN apt-get -qq -y update \
 USER $BUILD_USER_ID
 WORKDIR $BUILD_ROOT
 
-RUN curl -sSL "https://downloads.openwrt.org/releases/${OPENWRT_RELEASE}/targets/${OPENWRT_TARGET}/${OPENWRT_SUBTARGET}/openwrt-imagebuilder-${OPENWRT_RELEASE}-${OPENWRT_TARGET}-${OPENWRT_SUBTARGET}.Linux-x86_64.tar.xz" \
-        | tar --strip-components=1 -Jxf -
+RUN echo "https://downloads.openwrt.org/releases/${OPENWRT_RELEASE}/targets/${OPENWRT_TARGET}/${OPENWRT_SUBTARGET}/openwrt-imagebuilder-${OPENWRT_RELEASE}-${OPENWRT_TARGET}-${OPENWRT_SUBTARGET}.Linux-x86_64.tar.zst"
+RUN curl -sSL "https://downloads.openwrt.org/releases/${OPENWRT_RELEASE}/targets/${OPENWRT_TARGET}/${OPENWRT_SUBTARGET}/openwrt-imagebuilder-${OPENWRT_RELEASE}-${OPENWRT_TARGET}-${OPENWRT_SUBTARGET}.Linux-x86_64.tar.zst" \
+        | tar --strip-components=1 --zstd -xf -
 
 # This allows the Makefile to bust the layer cache to get updated packages...
 RUN echo "Building..."  # __CACHE_BUSTER__
